@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Results</title>
+</head>
+<body>
+    <h1>Search Results</h1>
+    <form method="GET">
+        <input type="text" name="query" placeholder="Search for dishes" value="{{ request.GET.query }}">
+        <input type="submit" value="Search">
+    </form>
+    <ul>
+        {% for dish in results %}
+        <li>
+            <h3>  Resturent Name : {{ dish.name }}</h3>
+            <ul>
+                {% for item, price in dish.items.items %}
+                        <li>{{ item }}: {{ price }}</li>
+                {% endfor %}
+            </ul>
+        {% comment %} Avalible Item
+            <li>{{ dish.items }}</li> {% endcomment %}
+        </li>
+        {% empty %}
+            <li>No results found.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
